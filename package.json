@@ -1,0 +1,21 @@
+{
+  "name": "clowd-api",
+  "version": "0.0.1-alpha",
+  "description": "Awesome API for clowd",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team836/clowd-api.git"
+  },
+  "author": "team836",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/team836/clowd-api/issues"
+  },
+  "homepage": "https://github.com/team836/clowd-api#readme",
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  }
+}
