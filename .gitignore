@@ -1,3 +1,4 @@
 #Define not tracking file
 .idea
 node_modules
+.env
