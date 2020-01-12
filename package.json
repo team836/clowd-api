@@ -15,6 +15,10 @@
     "url": "https://github.com/team836/clowd-api/issues"
   },
   "homepage": "https://github.com/team836/clowd-api#readme",
+  "_moduleAliases": {
+    "@": "build/src/app",
+    "@@": "build/src"
+  },
   "devDependencies": {
     "@types/node": "^13.1.6",
     "@typescript-eslint/eslint-plugin": "^2.15.0",
@@ -28,6 +32,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "module-alias": "^2.2.2",
     "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }
