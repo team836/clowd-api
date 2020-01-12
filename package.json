@@ -3,6 +3,11 @@
   "version": "0.0.1-alpha",
   "description": "Awesome API for clowd",
   "scripts": {
+    "build": "tsc",
+    "dev": "npm run start && tsc -w --incremental",
+    "start": "pm2 start ./pm2.config.js",
+    "stop": "pm2 stop ./pm2.config.js",
+    "restart": "pm2 restart ./pm2.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,12 +20,28 @@
     "url": "https://github.com/team836/clowd-api/issues"
   },
   "homepage": "https://github.com/team836/clowd-api#readme",
+  "_moduleAliases": {
+    "@": "build/src/app",
+    "@@": "build/src"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "express": "^4.17.1"
+  },
   "devDependencies": {
+    "@types/node": "^13.1.6",
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "module-alias": "^2.2.2",
     "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }
