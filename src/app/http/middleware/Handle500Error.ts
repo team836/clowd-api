@@ -1,0 +1,18 @@
+import { CldResponse, ErrorHandler } from '@/http/RequestHandler'
+
+export default class Handle500Error {
+  /**
+   * Handle 500 http error.
+   * This is last error handler.
+   */
+  public static handler(): ErrorHandler {
+    return (err, req, res, next): CldResponse => {
+      return res.status(500).json({
+        err: {
+          msg: 'Internal server error',
+          contents: err.stack
+        }
+      })
+    }
+  }
+}
