@@ -11,7 +11,7 @@ export default class UserController {
   //   })
   // }
   static checkUsers: SimpleHandler = (req, res): void => {
-    pool.query('sudo SELECT * from Users', (err, rows, fields) => {
+    pool.query('SELECT * from Users', (err, rows, fields) => {
       if (!err) {
         console.log('The solution is: ', rows)
         res.json({
