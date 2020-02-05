@@ -15,6 +15,7 @@ const users = express.Router()
 //   callbackURL: 'http://localhost:3000/v1/users/auth/google/callback',
 //   passReqToCallback: true
 //     },
+
 // function(req, accessToken, refreshToken, profile, done) {
 //   User.findOrCreate({ googleId: profile.id }, function(err, user) {
 //         return done(err, user)
