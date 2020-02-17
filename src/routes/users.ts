@@ -39,6 +39,4 @@ users.get('/notsecure', (req, res) => {
   console.log('server hi')
 })
 
-users.get('/auth/google/callback', (req, res, next) => {})
-
 export default users

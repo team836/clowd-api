@@ -2,6 +2,7 @@ import passport from 'passport'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import pool from '@/providers/DBServiceProvider'
 import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt'
+import LogHelper from '@/modules/LogHelper'
 
 passport.use(
   new GoogleStrategy(
@@ -14,7 +15,7 @@ passport.use(
     function(req, accessToken, refreshToken, profile, done) {
       pool.query(
         // User 기
-        "SELECT name FROM user WHERE name ='" + profile.id + "'",
+        "SELECT name FROM user WHERE googleID ='" + profile.id + "'",
         (err, user) => {
           console.log('Searched User value: ' + JSON.stringify(user))
 
@@ -36,10 +37,12 @@ passport.use(
                 "', now(), now())",
               (err, result) => {
                 if (!err) {
-                  console.log('Signed Up Succesfully')
+                  console.log('Processing Signed Up')
 
                   pool.query(
-                    "SELECT name FROM user WHERE name ='" + profile.id + "'",
+                    "SELECT name FROM user WHERE googleID ='" +
+                      profile.id +
+                      "'",
                     (err, user) => {
                       if (!err && user.length !== 0) {
                         console.log(
@@ -48,6 +51,10 @@ passport.use(
                         )
                         return done(null, user[0], {
                           message: 'Sign Up & Sign in'
+                        })
+                      } else {
+                        done(err, null, {
+                          message: 'Sign up failed!'
                         })
                       }
                     }
@@ -62,6 +69,8 @@ passport.use(
           } else {
             // User 있는 경우
             console.log('유저 있음')
+            console.log('Google accessToken :' + accessToken)
+            LogHelper.Instance.log('error', accessToken)
             return done(null, user[0], {
               message: 'Sign In Succesfully'
             })
