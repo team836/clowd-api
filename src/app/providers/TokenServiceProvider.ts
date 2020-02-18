@@ -1,18 +1,29 @@
 import jwt from 'jsonwebtoken'
 
-function generateAccessToken(name: string) {
-  const expiresIn = '12hour'
-  //const issuer = process.env.JWT_issuer
-  //const audience = process.env.JWT_audience
+export function generateAccessToken(googleId: string, name: string) {
+  const expiresIn = '5m'
+  const issuer = process.env.JWT_issuer
   const secret = process.env.JWT_secret
 
   const token = jwt.sign({}, secret, {
     expiresIn: expiresIn,
-    //audience: audience,
-    //issuer: issuer,
-    subject: name.toString()
+    audience: name.toString(),
+    issuer: issuer,
+    subject: googleId.toString()
   })
   return token
 }
 
-export default generateAccessToken
+export function generatRefreshToken(googleId: string, name: string) {
+  const expiresIn = '12hour'
+  const issuer = process.env.JWT_issuer
+  const secret = process.env.JWT_secret
+
+  const token = jwt.sign({}, secret, {
+    expiresIn: expiresIn,
+    audience: name.toString(),
+    issuer: issuer,
+    subject: googleId.toString()
+  })
+  return token
+}

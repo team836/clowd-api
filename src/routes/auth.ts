@@ -1,35 +1,37 @@
-import express from 'express'
-import jwt from 'jsonwebtoken'
-import { userDoc } from '@@/migrate/schema/User'
 import passport from '@@/app/http/controller/Passport'
 import AuthController from '@/http/controller/AuthController'
-import generateAccessToken from '@/providers/TokenServiceProvider'
+import express from 'express'
+// import jwt from 'jsonwebtoken'
+// import { userDoc } from '@@/migrate/schema/User'
 
 const auth = express.Router()
 
 passport.initialize()
 
+auth.get('/clowder/login', AuthController.clowderLogin)
+
+auth.get('/clowdee/login', AuthController.clowdeeLogin)
+
 auth.get(
-  '/login',
-  passport.authenticate('google', {
-    session: false,
-    scope: ['openid', 'profile', 'email']
-  })
+  '/clowdee/login/redirect',
+  passport.authenticate('clowdee', { session: false }),
+  AuthController.clowdeeLoginRedirect
 )
 
 auth.get(
-  '/login/redirect',
-  passport.authenticate('google', { session: false }),
-  (req, res) => {
-    const user = req.user as userDoc
+  '/clowder/login/redirect',
+  passport.authenticate('clowder', { session: false }),
+  AuthController.clowderLoginRedirect
+)
 
-    res.json({
-      accessToken: generateAccessToken(user.name)
-    })
-  }
+auth.get(
+  '/login/refresh',
+  passport.authenticate('jwt', { session: false }),
+  AuthController.loginRefresh
 )
 
 auth.get('/dev', (req, res) => {
+  console.log(req.query.q.toString())
   res.send('work')
 })
 

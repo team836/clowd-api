@@ -25,19 +25,4 @@ export default class UserController {
       }
     )
   }
-
-  static googleLogin: SimpleHandler = (req, res): void => {
-    passport.authenticate('google', {
-      successRedirect: '/loginSuccess',
-      failureRedirect: 'loginFailure'
-    })
-  }
-
-  static loginSuccess: Handler = (req, res, next) => {
-    res.send('Successfully authenticated')
-  }
-
-  static loginFailure: Handler = (req, res, next) => {
-    res.send('Failed to authenticate')
-  }
 }

@@ -1,8 +1,16 @@
 export type userDoc = {
-  // googleId: string
-  // email: string
-  // image: string
-  // signedInAt: Date
-  // singnedUpAt: Date
+  googleID: string
+  email: string
+  image: string
+  signedInAt: Date
+  singnedUpAt: Date
   name: string
+}
+
+export type jwtDoc = {
+  iat: string
+  exp: string
+  aud: string
+  iss: string
+  sub: string
 }
