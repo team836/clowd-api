@@ -1,8 +1,5 @@
 import pool from '@/providers/DBServiceProvider'
 import { SimpleHandler } from '@/http/RequestHandler'
-import passport from 'passport'
-import { Handler } from 'express'
-import jwt = require('jsonwebtoken')
 
 export default class UserController {
   static checkUsers: SimpleHandler = (req, res): void => {
@@ -24,20 +21,5 @@ export default class UserController {
         }
       }
     )
-  }
-
-  static googleLogin: SimpleHandler = (req, res): void => {
-    passport.authenticate('google', {
-      successRedirect: '/loginSuccess',
-      failureRedirect: 'loginFailure'
-    })
-  }
-
-  static loginSuccess: Handler = (req, res, next) => {
-    res.send('Successfully authenticated')
-  }
-
-  static loginFailure: Handler = (req, res, next) => {
-    res.send('Failed to authenticate')
   }
 }

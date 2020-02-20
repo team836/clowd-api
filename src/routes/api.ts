@@ -1,16 +1,17 @@
 import express from 'express'
 import users from '@@/routes/users'
 import auth from '@@/routes/auth'
+import passport from '@@/app/http/controller/Passport'
 
 const mainRouter = express.Router()
 
-mainRouter.use('/auth', auth)
-mainRouter.use('/users', users)
+passport.initialize()
 
-mainRouter.get('/', (req, res) => {
-  res.json({
-    name: 'jaesang'
-  })
-})
+mainRouter.use('/auth', auth)
+mainRouter.use(
+  '/users',
+  passport.authenticate('jwt', { session: false }),
+  users
+)
 
 export default mainRouter

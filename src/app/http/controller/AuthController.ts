@@ -1,30 +1,59 @@
-import pool from '@/providers/DBServiceProvider'
-import { SimpleHandler } from '@/http/RequestHandler'
+import { userDoc, jwtDoc } from '@@/migrate/schema/User'
+import {
+  generateAccessToken,
+  generatRefreshToken
+} from '@/providers/TokenServiceProvider'
 import passport from 'passport'
 import { Handler } from 'express'
-import jwt = require('jsonwebtoken')
+import jwtDecode from 'jwt-decode'
 
 export default class AuthController {
-  static login: Handler = (req, res, next): void => {
-    passport.authenticate('google', {
-      session: false,
-      scope: ['openid', 'profile', 'email']
+  static clowdeeLogin: Handler = passport.authenticate('clowdee', {
+    session: false,
+    scope: ['openid', 'profile', 'email']
+  })
+
+  static clowderLogin: Handler = passport.authenticate('clowder', {
+    session: false,
+    scope: ['openid', 'profile', 'email']
+  })
+
+  static clowdeeLoginRedirect: Handler = (req, res) => {
+    const user = req.user as userDoc
+
+    const accessToken = generateAccessToken(user.googleID, user.name)
+    const refreshToken = generatRefreshToken(user.googleID, user.name)
+    console.log('redirect clowdee user: ' + user.googleID, user.name)
+    const deepLink = 'exp://127.0.0.1:19000/'
+
+    res.redirect(
+      deepLink + '?accessToken=' + accessToken + '&refreshToken=' + refreshToken
+    )
+  }
+
+  static clowderLoginRedirect: Handler = (req, res) => {
+    const user = req.user as userDoc
+
+    const accessToken = generateAccessToken(user.googleID, user.name)
+    const refreshToken = generatRefreshToken(user.googleID, user.name)
+    console.log('redirect clowder user: ' + user.googleID, user.name)
+
+    res.json({
+      accessToken: accessToken,
+      refreshToken: refreshToken
     })
-    //{
-    //   if (err || !user) {
-    //     return res.status(400).json({
-    //       message: 'Something is not right',
-    //       user: user
-    //     })
-    //   }
-    //   req.login(user, { session: false }, err => {
-    //     if (err) {
-    //       res.send(err)
-    //     }
-    //   })
-    //   const token = jwt.sign(user, process.env.JWT_secret)
-    //   return res.json({ user, token })
-    // })(req, res)
-    //}
+  }
+
+  static loginRefresh: Handler = (req, res) => {
+    const decoded: jwtDoc = jwtDecode(req.header('Authorization'))
+
+    const accessToken = generateAccessToken(decoded.sub, decoded.aud)
+    const refreshToken = generatRefreshToken(decoded.sub, decoded.aud)
+    console.log('refresh user: ' + decoded.sub + decoded.aud)
+
+    res.json({
+      accessToken: accessToken,
+      refreshToken: refreshToken
+    })
   }
 }
