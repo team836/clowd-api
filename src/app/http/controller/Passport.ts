@@ -137,6 +137,9 @@ passport.use(
   })
 )
 
+/************************************************/
+/*  Be ready for Local Strategy But not in user */
+/************************************************/
 // passport.use(
 //   new LocalStrategy(
 //     {

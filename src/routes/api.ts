@@ -14,10 +14,4 @@ mainRouter.use(
   users
 )
 
-mainRouter.get('/', (req, res) => {
-  res.json({
-    name: 'jaesang'
-  })
-})
-
 export default mainRouter

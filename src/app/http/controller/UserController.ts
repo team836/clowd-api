@@ -1,8 +1,5 @@
 import pool from '@/providers/DBServiceProvider'
 import { SimpleHandler } from '@/http/RequestHandler'
-import passport from 'passport'
-import { Handler } from 'express'
-import jwt = require('jsonwebtoken')
 
 export default class UserController {
   static checkUsers: SimpleHandler = (req, res): void => {

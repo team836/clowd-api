@@ -30,9 +30,4 @@ auth.get(
   AuthController.loginRefresh
 )
 
-auth.get('/dev', (req, res) => {
-  console.log(req.query.q.toString())
-  res.send('work')
-})
-
 export default auth
