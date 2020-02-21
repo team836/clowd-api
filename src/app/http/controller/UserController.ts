@@ -1,4 +1,4 @@
-import pool from '@/providers/DBServiceProvider'
+import { connectionPool as pool } from '@/providers/DBServiceProvider'
 import { SimpleHandler } from '@/http/RequestHandler'
 
 export default class UserController {
