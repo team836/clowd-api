@@ -21,9 +21,9 @@ export default class AuthController {
   static clowdeeLoginRedirect: Handler = (req, res) => {
     const user = req.user as userDoc
 
-    const accessToken = generateAccessToken(user.googleID, user.name)
-    const refreshToken = generatRefreshToken(user.googleID, user.name)
-    console.log('redirect clowdee user: ' + user.googleID, user.name)
+    const accessToken = generateAccessToken(user.google_id, user.name)
+    const refreshToken = generatRefreshToken(user.google_id, user.name)
+    console.log('redirect clowdee user: ' + user.google_id, user.name)
     const deepLink = 'exp://127.0.0.1:19000/'
 
     res.redirect(
@@ -32,11 +32,12 @@ export default class AuthController {
   }
 
   static clowderLoginRedirect: Handler = (req, res) => {
+    console.log('redirect in')
     const user = req.user as userDoc
 
-    const accessToken = generateAccessToken(user.googleID, user.name)
-    const refreshToken = generatRefreshToken(user.googleID, user.name)
-    console.log('redirect clowder user: ' + user.googleID, user.name)
+    const accessToken = generateAccessToken(user.google_id, user.name)
+    const refreshToken = generatRefreshToken(user.google_id, user.name)
+    console.log('redirect clowder user: ' + user.google_id, user.name)
 
     res.json({
       accessToken: accessToken,

@@ -1,9 +1,7 @@
 export type userDoc = {
-  googleID: string
+  google_id: string
   email: string
   image: string
-  signedInAt: Date
-  singnedUpAt: Date
   name: string
 }
 
