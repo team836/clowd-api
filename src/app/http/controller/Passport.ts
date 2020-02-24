@@ -250,7 +250,7 @@ const googleClowderCB: verifyFunction = (
               pool.query(
                 "INSERT INTO clowders values ('" +
                   profile.id +
-                  "' ,0 , now(), now());",
+                  "', now(), now());",
                 (err, result) => {
                   if (err) {
                     console.log('Error during insert clowder DB')
