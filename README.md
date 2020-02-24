@@ -4,8 +4,8 @@
 
 Developed with TypeScript & Express Framework
 --------------
-This server's main role is managing the user data and user authenticate.  
-We use JWT authentication for secured API and MySQL Database for user DB
+This server's main role is managing user data and user authentication.
+We are using JWT authentication for secured API and MySQL Database for the user DB.
  
 ## Functions
 >1. Basic API
@@ -18,32 +18,31 @@ Providing user Information to Front-End side
 > 1. Offer user Information to Front-End
 
 ## User management
-User Database has 3 tables (User table, Clowder table, Clowdee table)
-Clowder table and Clowdee table have dependency to User table and always handled User table with clowder table or clowdee table together.  
-As we seperate user tables, It can easily block the malformed request access like when clowder user request the API to clowdee API and vice versa 
-And also It can make managing user easily.
+The User Database has 3 tables (User table, Clowder table, Clowdee table)
+
+Clowder table and Clowdee table have dependencies to User table. Because of this User table is always handled with either Clowder table or Clowdee table.  
+As we seperated user tables, it can easily block the malformed request access like when Clowder user request the API to Clowdee API and vice versa.
+This makes managing users easy.
 
 > 1. User Sign Up
 > 2. User Sign In / Out
-> 3. Manage User DB between clowder & clowdee
+> 3. Manage User DB between Clowder & Clowdee
 
 ## User Authentication
-Basically we use Google Oauth2.0 API.
-Our system has multi-server which is GO server and Express server. We make GO server for 
-fast file processing by maximize the parellism. Therefore GO server's authentication should be 
-fast either.  
-For this, in the GO server, we didn't check the token's user payload. Just check whether this token is valid or not
-It speed up the every request's authentication by not access to database server. But It can be dangerous.  
-We overcome this problem by limit the token's expiry time very short. and refresh it many times, and check the user's valid when 
-refresh the token in the API server, not GO server.
+Basically we are using Google Oauth2.0 API.
+Our system is multi-server using GO and Express servers. We made the GO server for 
+fast file processing by maximizing the parellelism. Therefore GO server's authentication should also be fast.  
+For this, in the GO server, we didn't check the token's user payload. We are just checking whether this token is valid or not.
+Doing this speeds up every authentication request by not accessing the database server. But it can be dangerous.  
+We overcame this problem by: limiting the token's expiry time to be very short, refreshing it many times, and checking the user is valid when refreshing the token in the API server, not the GO server.
 
 > 1. Use Google Oauth2.0
 > 2. Check the user's validity in the API server
-> 3. Don't check the user's valid when access to GO server
+> 3. Don't check the user's valididity when accessing the GO server
 
 ## Token management
-Our server is using Google Oauth2.0 API and token authentication. We get user Information from the 
-Google and make accessToken and refreshToken. As we mentioned, It limit the access token's expiry time very short and It force to user should refresh the token many time.
+Our server is using Google Oauth2.0 API and token authentication. We get user information from 
+Google and make accessToken and refreshToken. As we mentioned, we limit the access token's expiry time to be very short. This forces the user to refresh the token many times.
 > 1. Provide accessToken and refreshToken when sign in
 > 2. Refreshing the token when accessToken is expired.
 
