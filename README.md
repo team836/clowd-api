@@ -4,15 +4,23 @@
 
 Developed with NodeJS Express Framework
 --------------
-# Function & Roll
+## Function & Roll
 >1. Basic API
 >2. User management
 >3. Token management
 >4. User Authentication
 
+## Basic API
+> 1. API 없어 RFC다 자식드라~!
 
+## User management
+> 1. 유저는 강아지다!
 
+## Token management
+> 1. 토큰은 멍멍이다!
 
+## User Authentication
+> 1. 내일 하자 귀찮다
 
 
 access는 짧고, refresh는 길게
