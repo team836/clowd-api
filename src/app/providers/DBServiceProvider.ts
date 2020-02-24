@@ -20,7 +20,7 @@ export class DBServiceProvider {
           console.log(err)
         } else {
           connectionPool.query(
-            'CREATE TABLE IF NOT EXISTS clowders (google_id VARCHAR(63) PRIMARY KEY, max_capacity SMALLINT(4) UNSIGNED NOT NULL DEFAULT 0, signed_in_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, signed_up_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (google_id) REFERENCES users(google_id) ON UPDATE CASCADE ON DELETE CASCADE);',
+            'CREATE TABLE IF NOT EXISTS clowders (google_id VARCHAR(63) PRIMARY KEY, signed_in_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, signed_up_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (google_id) REFERENCES users(google_id) ON UPDATE CASCADE ON DELETE CASCADE);',
             (err, result) => {
               if (err) {
                 console.log(err)

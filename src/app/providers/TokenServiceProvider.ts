@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 export function generateAccessToken(googleId: string, name: string) {
-  const expiresIn = '5m'
+  const expiresIn = '24hour'
   const issuer = process.env.JWT_issuer
   const secret = process.env.JWT_secret
 
@@ -15,7 +15,7 @@ export function generateAccessToken(googleId: string, name: string) {
 }
 
 export function generatRefreshToken(googleId: string, name: string) {
-  const expiresIn = '12hour'
+  const expiresIn = '72hour'
   const issuer = process.env.JWT_issuer
   const secret = process.env.JWT_secret
 
