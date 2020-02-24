@@ -209,7 +209,7 @@ const googleClowderCB: verifyFunction = (
               const insertClowder =
                 "INSERT INTO clowders values ('" +
                 profile.id +
-                "' ,0 , now(), now());"
+                "' , now(), now());"
 
               // 1-1-1. User Table INSERT & Clowdee Table INSERT
               pool.query(insertUser + insertClowder, (err, result) => {
