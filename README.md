@@ -20,28 +20,30 @@ Providing user Information to Front-End side
 ## User management
 User Database has 3 tables (User table, Clowder table, Clowdee table)
 Clowder table and Clowdee table have dependency to User table and always handled User table with clowder table or clowdee table together.  
-이렇게 DB를 갈라놓음으로써 Clowder -> Clowdee request불가, 역도 불가 malformed한 요청 차단
-또한 유저 관리 용이
+As we seperate user tables, It can easily block the malformed request access like when clowder user request the API to clowdee API and vice versa 
+And also It can make managing user easily.
 
 > 1. User Sign Up
 > 2. User Sign In / Out
 > 3. Manage User DB between clowder & clowdee
 
-## User Authentication자
+## User Authentication
+Basically we use Google Oauth2.0 API.
 Our system has multi-server which is GO server and Express server. We make GO server for 
 fast file processing by maximize the parellism. Therefore GO server's authentication should be 
 fast either.  
-For this, 고 서버에선 유저 유효성 검사 하지 X 즉, DB검사를 하지 않음으로써 부하를 줄임 -> 빠름 but 위험하므로 
-accesstoken 의 expire time을 매우 짧게 하여 Refresh token을 자주 하게 만들고, token을 refresh할 때마다 
-user의 유효성을 검사
-또한 Clowder는 Clowdee로 
+For this, in the GO server, we didn't check the token's user payload. Just check whether this token is valid or not
+It speed up the every request's authentication by not access to database server. But It can be dangerous.  
+We overcome this problem by limit the token's expiry time very short. and refresh it many times, and check the user's valid when 
+refresh the token in the API server, not GO server.
 
-> 1. 내일 마무리하자
+> 1. Use Google Oauth2.0
+> 2. Check the user's validity in the API server
+> 3. Don't check the user's valid when access to GO server
 
 ## Token management
 Our server is using Google Oauth2.0 API and token authentication. We get user Information from the 
-Google and make accessToken and refreshToken.
+Google and make accessToken and refreshToken. As we mentioned, It limit the access token's expiry time very short and It force to user should refresh the token many time.
 > 1. Provide accessToken and refreshToken when sign in
 > 2. Refreshing the token when accessToken is expired.
-> 3. 
 
