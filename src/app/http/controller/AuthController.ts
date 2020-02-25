@@ -24,7 +24,7 @@ export default class AuthController {
     const accessToken = generateAccessToken(user.google_id, user.name)
     const refreshToken = generatRefreshToken(user.google_id, user.name)
     console.log('redirect clowdee user: ' + user.google_id, user.name)
-    const deepLink = 'exp://127.0.0.1:19000/'
+    const deepLink = 'exp://qj-6pr.jhaemin.clowd-mobile.exp.direct:80/'
 
     res.redirect(
       deepLink + '?accessToken=' + accessToken + '&refreshToken=' + refreshToken
